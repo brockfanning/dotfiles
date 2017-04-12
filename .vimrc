@@ -21,7 +21,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Use fancy arrow symbols in airline
 let g:airline_powerline_fonts = 1
-set guifont=Liberation_Mono_for_Powerline:h10 
 
 " colors?
 set t_Co=256
