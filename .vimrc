@@ -2,10 +2,32 @@
 set nocompatible
 set encoding=utf-8
 
+" Need to set this before plugins to have it work
+let mapleader = "," " sets leader to comma
+
 execute pathogen#infect('~/.vim/bundle/drupalvim/bundle/{}')
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
+
+" Turn of swapfile creation
+set noswapfile
+
+" Round indent to nearest multiple of 4
+set shiftround
+" No line-wrapping
+set nowrap
+
+" Start scrolling slightly before the cursor reaches an edge
+set scrolloff=3
+set sidescrolloff=5
+" Scroll sideways a character at a time, rather than a screen at a time
+set sidescroll=1
+" Allow motions and back-spacing over line-endings etc
+set backspace=indent,eol,start
+set whichwrap=h,l,b,<,>,~,[,]
+" Underscores denote words
+set iskeyword-=_
 
 " editorconfig recommendation
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -49,8 +71,24 @@ set ignorecase
 " ...except if we input a capital letter
 set smartcase
 
+if exists("+colorcolumn")
+  set colorcolumn=81
+endif
+
 " allow switching buffers without saving changes
 set hidden
 
-nmap [5;5~ :bprevious<CR>
-nmap [6;5~ :bnext<CR>
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
+nnoremap <leader>g :vimgrep /
